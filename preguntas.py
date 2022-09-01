@@ -163,8 +163,7 @@ def pregunta_08():
     return salida
 
 def pregunta_09():
-    cadenas = []
-    conteo = []
+    salida = {}
 
     with open('data.csv') as csv_file:
         datos = csv.reader(csv_file, delimiter='	')
@@ -174,18 +173,12 @@ def pregunta_09():
             for elemento in diccionario: 
                 cadena = elemento.split(':')[0]
 
-                if cadena not in cadenas:
-                    cadenas.append(cadena)
-                    conteo.append(1)
+                if cadena not in salida.keys():
+                    salida[cadena] = 1
                 else:
-                    conteo[cadenas.index(cadena)] += 1
+                    salida[cadena] += 1
 
-    salida = []
-
-    for cadena in sorted(cadenas):
-        salida.append((cadena, conteo[cadenas.index(cadena)]))
-
-    return salida
+    return dict(sorted(salida.items()))
 
 def pregunta_10():
     salida = []
