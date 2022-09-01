@@ -11,17 +11,17 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
+import csv
 
 def pregunta_01():
-    """
-    Retorne la suma de la segunda columna.
+    suma = 0
 
-    Rta/
-    214
+    with open('data.csv') as csv_file:
+        datos = csv.reader(csv_file, delimiter='	')
+        for fila in datos:
+            suma += int(fila[1])
 
-    """
-    return
+    return suma
 
 
 def pregunta_02():
