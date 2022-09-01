@@ -85,9 +85,9 @@ def pregunta_05():
         for fila in datos:
             if not fila[0] in letras:
                 letras.append(fila[0])
-                conteo.append([fila[1]])
+                conteo.append([int(fila[1])])
             else:
-                conteo[letras.index(fila[0])].append(fila[1])
+                conteo[letras.index(fila[0])].append(int(fila[1]))
 
     salida = []
 
@@ -95,6 +95,8 @@ def pregunta_05():
         salida.append((letra, max(conteo[letras.index(letra)]), min(conteo[letras.index(letra)])))
     
     return salida
+
+print(pregunta_05())
 
 def pregunta_06():
     cadenas = []
