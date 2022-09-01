@@ -40,91 +40,87 @@ def pregunta_02():
     return salida
 
 
-# def pregunta_03():
-#     """
-#     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
-#     de tuplas (letra, suma) ordendas alfabeticamente.
+def pregunta_03():
+    letras = []
+    conteo = []
 
-#     Rta/
-#     [
-#         ("A", 53),
-#         ("B", 36),
-#         ("C", 27),
-#         ("D", 31),
-#         ("E", 67),
-#     ]
+    with open('data.csv') as csv_file:
+        datos = csv.reader(csv_file, delimiter='	')
+        for fila in datos:
+            if not fila[0] in letras:
+                letras.append(fila[0])
+                conteo.append(int(fila[1]))
+            else:
+                conteo[letras.index(fila[0])] += int(fila[1])
 
-#     """
-#     return
+    salida = []
+    
+    for letra in sorted(letras):
+        salida.append((letra, conteo[letras.index(letra)]))
 
+    return salida
 
-# def pregunta_04():
-#     """
-#     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
-#     registros por cada mes, tal como se muestra a continuación.
+def pregunta_04():
+    meses = []
 
-#     Rta/
-#     [
-#         ("01", 3),
-#         ("02", 4),
-#         ("03", 2),
-#         ("04", 4),
-#         ("05", 3),
-#         ("06", 3),
-#         ("07", 5),
-#         ("08", 6),
-#         ("09", 3),
-#         ("10", 2),
-#         ("11", 2),
-#         ("12", 3),
-#     ]
+    with open('data.csv') as csv_file:
+        datos = csv.reader(csv_file, delimiter='	')
+        for fila in datos:
+            mes = fila[2].split('-')[1]
+            meses.append(mes)
 
-#     """
-#     return
+    salida = []
 
+    for mes in sorted(set(meses)):
+        salida.append((mes, meses.count(mes)))
 
-# def pregunta_05():
-#     """
-#     Retorne una lista de tuplas con el valor maximo y minimo de la columna 2 por cada
-#     letra de la columa 1.
+    return salida
+    
+def pregunta_05():
+    letras = []
+    conteo = []
 
-#     Rta/
-#     [
-#         ("A", 9, 2),
-#         ("B", 9, 1),
-#         ("C", 9, 0),
-#         ("D", 8, 3),
-#         ("E", 9, 1),
-#     ]
+    with open('data.csv') as csv_file:
+        datos = csv.reader(csv_file, delimiter='	')
+        for fila in datos:
+            if not fila[0] in letras:
+                letras.append(fila[0])
+                conteo.append([fila[1]])
+            else:
+                conteo[letras.index(fila[0])].append(fila[1])
 
-#     """
-#     return
+    salida = []
 
+    for letra in sorted(set(letras)):
+        salida.append((letra, max(conteo[letras.index(letra)]), min(conteo[letras.index(letra)])))
+    
+    return salida
 
-# def pregunta_06():
-#     """
-#     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
-#     una clave y el valor despues del caracter `:` corresponde al valor asociado a la
-#     clave. Por cada clave, obtenga el valor asociado mas pequeño y el valor asociado mas
-#     grande computados sobre todo el archivo.
+def pregunta_06():
+    cadenas = []
+    valores = []
 
-#     Rta/
-#     [
-#         ("aaa", 1, 9),
-#         ("bbb", 1, 9),
-#         ("ccc", 1, 10),
-#         ("ddd", 0, 9),
-#         ("eee", 1, 7),
-#         ("fff", 0, 9),
-#         ("ggg", 3, 10),
-#         ("hhh", 0, 9),
-#         ("iii", 0, 9),
-#         ("jjj", 5, 17),
-#     ]
+    with open('data.csv') as csv_file:
+        datos = csv.reader(csv_file, delimiter='	')
+        for fila in datos:
+            diccionario = fila[4].split(',')
 
-#     """
-#     return
+            for elemento in diccionario: 
+                cadena = elemento.split(':')[0]
+                valor = elemento.split(':')[1]
 
+                if cadena not in cadenas:
+                    cadenas.append(cadena)
+                    valores.append([int(valor)])
+                else:
+                    valores[cadenas.index(cadena)].append(int(valor))
+
+    salida = []
+
+    for cadena in sorted(cadenas):
+        salida.append((cadena, min(valores[cadenas.index(cadena)]), max(valores[cadenas.index(cadena)])))
+
+    return salida
 
 # def pregunta_07():
 #     """
